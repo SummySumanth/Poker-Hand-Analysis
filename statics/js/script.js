@@ -94,42 +94,15 @@ let getCardImage = {
 let containsNTimes = (handRanks, elementToBeSearched, minimum) =>{
 	let count = 0;
 	let flag = false;
-	// console.log('starting with flag  : ' + flag);
-	// console.log('starting with count  : ' + count);
-
-	// console.log('Hand Ranks ->');
-	// console.log(handRanks);
-	
-	// console.log('elementToBeSearched ->');
-	// console.log(elementToBeSearched);
-
-	// console.log('minimum ->');
-	// console.log(minimum);
 
 	for( key in handRanks){
 		if(handRanks[key] === elementToBeSearched){
 			count++;
 		}
-		// console.log('-------------------------------------------------------------');
-		// console.log('');
-		// console.log('');
-		// console.log('');
-		// console.log('-------------------------------------------------------------');
 	}
-
-	// console.log('count during if :' + count);
-	// console.log('minimum ->' + minimum);
 	if(count === minimum){
-		// console.log('In if');
 	    flag = true;
-	}
-	// console.log('after with flag  : ' + flag);
-
-	// console.log('');
-	// console.log('');
-	// console.log('count ->');
-	// console.log(count);
-
+	} 
 	return flag; 
 } 
 
@@ -172,8 +145,6 @@ var hasOnePair = (hand) =>{
 			numberOfPairs++;
 		}
 	});
-	console.log('numberOfPairs');
-	console.log(numberOfPairs);
 	if(numberOfPairs > 1){
 		result = false;
 	}
@@ -181,24 +152,11 @@ var hasOnePair = (hand) =>{
 };
 
 
-
 let getPresentHands = (hand) =>{
-	console.log(hand);
-
 	let handStrenth = {
 		onePair : hasOnePair(hand),
 		twoPair : hasTwoPair(hand),
 	};
-
-	console.log('');
-	console.log('');
-	console.log('');
-	console.log('');
-	console.log('========================================================');
-	console.log('========================================================');
-	console.log('');
-	console.log('Hand Strength');
-	console.log(handStrenth);
 }
 
 let init = () =>{
