@@ -4,10 +4,10 @@ let ranks = ['ace', 'king', 'queen', 'jack', 'ten', 'nine', 'eight', 'seven', 's
 
 let hand = [
 				{	rank:'ace', suit: 'clubs'		},
-				{	rank:'king', suit: 'clubs'	},
-				{	rank:'queen', suit: 'clubs'		},
-				{	rank:'jack', suit: 'clubs'		},
-				{	rank:'ten', suit: 'clubs'	}
+				{	rank:'ace', suit: 'clubs'	},
+				{	rank:'ace', suit: 'clubs'		},
+				{	rank:'king', suit: 'clubs'		},
+				{	rank:'king', suit: 'clubs'	}
 			];
 
 let getCardImage = {
@@ -155,6 +155,22 @@ let numberOfSuits = (handSuits) =>{
 			console.log(differenceCount);
 		}
 	}
+}
+
+let isFullHouse = (hand) =>{
+	let result = false;
+	console.log(hand)
+
+	let handHasThreeOfAKind = isThreeOfAKind(hand);
+	let handHasTwoPair = hasOnePair(hand);
+	console.log('handHasThreeOfAKind');
+	console.log(handHasThreeOfAKind);
+	console.log('handHasTwoPair');
+	console.log(handHasTwoPair);
+	if( handHasThreeOfAKind && handHasTwoPair){
+		result = true;
+	}
+	return result;
 }
 
 let isRoyalFlush = (hand) =>{
@@ -346,6 +362,7 @@ let getPresentHands = (hand) =>{
 		flush 			: isFlush(hand),
 		straightFlush	: isStraightFlush(hand),
 		royalFlush 		: isRoyalFlush(hand),
+		fullHouse		: isFullHouse(hand)
 	};
 	console.log(handStrenth);
 }
