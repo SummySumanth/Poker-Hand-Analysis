@@ -157,6 +157,17 @@ let numberOfSuits = (handSuits) =>{
 	}
 }
 
+let isStraightFlush = (hand) =>{
+	let result = false;
+	let isHandStraight = isStraight(hand);
+	let isHandFlush = isFlush(hand);
+
+	if( isHandStraight && isHandFlush){
+		result = true;
+	}
+	return result;
+}
+
 let isFlush = (hand) =>{
 	let result = false;
 	let handSuits = hand.map(function (card) {
@@ -288,12 +299,13 @@ var hasOnePair = (hand) =>{
 
 let getPresentHands = (hand) =>{
 	let handStrenth = {
-		onePair 	: hasOnePair(hand),
-		twoPair 	: hasTwoPair(hand),
-		threeOfAKind: isThreeOfAKind(hand),
-		fourOfAKind : isFourOfAKind(hand),
-		straight 	: isStraight(hand),
-		flush 		: isFlush(hand),
+		onePair 		: hasOnePair(hand),
+		twoPair 		: hasTwoPair(hand),
+		threeOfAKind 	: isThreeOfAKind(hand),
+		fourOfAKind 	: isFourOfAKind(hand),
+		straight 		: isStraight(hand),
+		flush 			: isFlush(hand),
+		straightFlush	: isStraightFlush(hand),
 	};
 	console.log(handStrenth);
 }
