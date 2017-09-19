@@ -3,11 +3,11 @@ let suits = ['clubs', 'hearts', 'spades', 'diamonds'];
 let ranks = ['ace', 'king', 'queen', 'jack', 'ten', 'nine', 'eight', 'seven', 'six', 'five', 'four', 'three', 'two'];
 
 let hand = [
-				{	rank:'ace', suit: 'clubs'		},
-				{	rank:'ace', suit: 'diamonds'	},
-				{	rank:'nine', suit: 'hearts'		},
-				{	rank:'six', suit: 'spades'		},
-				{	rank:'six', suit: 'diamonds'	}
+				{	rank:'three', suit: 'clubs'		},
+				{	rank:'four', suit: 'diamonds'	},
+				{	rank:'six', suit: 'hearts'		},
+				{	rank:'five', suit: 'spades'		},
+				{	rank:'ace', suit: 'diamonds'	}
 			];
 
 let getCardImage = {
@@ -91,6 +91,41 @@ let getCardImage = {
 						}
 					};
 
+// let getRank = {
+// 					'ace'	: 14, 
+// 					'king'	: 13, 
+// 					'queen'	: 12, 
+// 					'jack'	: 11, 
+// 					'ten'	: 10, 
+// 					'nine'	: 9, 
+// 					'eight'	: 8, 
+// 					'seven'	: 7, 
+// 					'six'	: 6, 
+// 					'five'	: 5, 
+// 					'four'	: 4, 
+// 					'three'	: 3, 
+// 					'two'	: 2
+// 				};
+
+let getRank = (card) =>{
+	switch(card){
+		case 'ace'		: return 14; 
+		case 'king'		: return 13; 
+		case 'queen'	: return 12;
+		case 'jack'		: return 11; 
+		case 'ten'		: return 10; 
+		case 'nine'		: return 9;
+		case 'eight'	: return 8; 
+		case 'seven'	: return 7; 
+		case 'six'		: return 6; 
+		case 'five'		: return 5; 
+		case 'four'		: return 4; 
+		case 'three'	: return 3; 
+		case 'two'		: return 2;
+		default			: return false;
+	}
+}
+
 let containsNTimes = (handRanks, elementToBeSearched, minimum) =>{
 	let count = 0;
 	let flag = false;
@@ -106,8 +141,62 @@ let containsNTimes = (handRanks, elementToBeSearched, minimum) =>{
 	return flag; 
 } 
 
+let isOrdered = (handRanks) =>{
+	console.log('handRanks-->');
+	console.log(handRanks);
+	let highestRank = 0;
+	let lowestRank = 0;
+	
+	console.log(getRank(currentRank));
+	// for(let i = 0 ; i < handRanks.length; i++){
+	// 	if( getRank.handRanks[i] > getRank.handRanks[highestRank] )
+	// }
+}
 
-var hasTwoPair = (ha444nd) =>{
+let isStraight = (hand) =>{
+	let result = false;
+	let numberOfPairs = 0;
+	let handRanks;
+	handRanks = hand.map(function (card) {
+		return card.rank;
+	});
+	ranks.forEach(function (rank) {
+		let flag = containsNTimes(handRanks, rank, 2);
+		if (flag) {
+			result = true;
+			numberOfPairs++;
+		}
+	});
+	console.log('numberOfPairs   ->  ' + numberOfPairs);
+	if(numberOfPairs === 0){
+		let ordered =	isOrdered(handRanks);
+	}
+
+
+
+	return result;
+
+}
+
+let isThreeOfAKind = (hand) =>{
+	let result = false;
+	let handRanks;
+	
+	handRanks = hand.map(function (card) {
+		return card.rank;
+	});
+
+	ranks.forEach(function (rank) {
+		let flag = containsNTimes(handRanks, rank, 3);
+		if (flag) {
+			result = true;
+		}
+	});
+
+	return result;
+}
+
+var hasTwoPair = (hand) =>{
 	let result = false;
 	let numberOfPairs = 0;
 	let handRanks;
@@ -156,7 +245,10 @@ let getPresentHands = (hand) =>{
 	let handStrenth = {
 		onePair : hasOnePair(hand),
 		twoPair : hasTwoPair(hand),
+		threeOfAKind : isThreeOfAKind(hand),
+		straight : isStraight(hand)
 	};
+	console.log(handStrenth);
 }
 
 let init = () =>{
