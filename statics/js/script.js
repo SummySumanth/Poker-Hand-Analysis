@@ -2,13 +2,7 @@ let suits = ['clubs', 'hearts', 'spades', 'diamonds'];
 
 let ranks = ['ace', 'king', 'queen', 'jack', 'ten', 'nine', 'eight', 'seven', 'six', 'five', 'four', 'three', 'two'];
 
-let hand = [
-				{	rank:'ace', suit: 'clubs'		},
-				{	rank:'ace', suit: 'clubs'	},
-				{	rank:'ace', suit: 'clubs'		},
-				{	rank:'king', suit: 'clubs'		},
-				{	rank:'king', suit: 'clubs'	}
-			];
+let hand;
 
 let getCardImage = {
 						ace: {
@@ -352,7 +346,7 @@ var hasOnePair = (hand) =>{
 };
 
 
-let getPresentHands = (hand) =>{
+let handAssessor = (hand) =>{
 	let handStrenth = {
 		onePair 		: hasOnePair(hand),
 		twoPair 		: hasTwoPair(hand),
@@ -372,7 +366,14 @@ let getPresentHands = (hand) =>{
 }
 
 let init = () =>{
-	getPresentHands(hand);
+	hand = [
+				{	rank:'ace', suit: 'clubs'		},
+				{	rank:'ace', suit: 'clubs'	},
+				{	rank:'ace', suit: 'clubs'		},
+				{	rank:'king', suit: 'clubs'		},
+				{	rank:'king', suit: 'clubs'	}
+			];
+	handAssessor(hand);
 }
 
 init();
