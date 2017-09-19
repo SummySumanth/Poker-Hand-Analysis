@@ -198,6 +198,24 @@ let isStraight = (hand) =>{
 	return result;
 }
 
+let isFourOfAKind = (hand) =>{
+	let result = false;
+	let handRanks;
+	
+	handRanks = hand.map(function (card) {
+		return card.rank;
+	});
+
+	ranks.forEach(function (rank) {
+		let flag = containsNTimes(handRanks, rank, 4);
+		if (flag) {
+			result = true;
+		}
+	});
+
+	return result;
+}
+
 let isThreeOfAKind = (hand) =>{
 	let result = false;
 	let handRanks;
@@ -266,6 +284,7 @@ let getPresentHands = (hand) =>{
 		onePair : hasOnePair(hand),
 		twoPair : hasTwoPair(hand),
 		threeOfAKind : isThreeOfAKind(hand),
+		fourOfAKind : isFourOfAKind(hand),
 		straight : isStraight(hand)
 	};
 	console.log(handStrenth);
