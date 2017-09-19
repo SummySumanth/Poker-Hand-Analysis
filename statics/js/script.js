@@ -362,8 +362,12 @@ let getPresentHands = (hand) =>{
 		flush 			: isFlush(hand),
 		straightFlush	: isStraightFlush(hand),
 		royalFlush 		: isRoyalFlush(hand),
-		fullHouse		: isFullHouse(hand)
+		fullHouse		: isFullHouse(hand),
 	};
+
+	if( !handStrenth.onePair && !handStrenth.twoPair && !handStrenth.threeOfAKind && !handStrenth.fourOfAKind && !handStrenth.straight && !handStrenth.flush && !handStrenth.straightFlush && !handStrenth.royalFlush && !handStrenth.fullHouse){
+		console.log('Bust !');
+	}
 	console.log(handStrenth);
 }
 
