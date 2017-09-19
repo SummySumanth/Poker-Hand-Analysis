@@ -4,10 +4,10 @@ let ranks = ['ace', 'king', 'queen', 'jack', 'ten', 'nine', 'eight', 'seven', 's
 
 let hand = [
 				{	rank:'three', suit: 'clubs'		},
-				{	rank:'four', suit: 'diamonds'	},
-				{	rank:'six', suit: 'hearts'		},
-				{	rank:'five', suit: 'spades'		},
-				{	rank:'ace', suit: 'diamonds'	}
+				{	rank:'four', suit: 'clubs'	},
+				{	rank:'six', suit: 'clubs'		},
+				{	rank:'five', suit: 'clubs'		},
+				{	rank:'ace', suit: 'clubs'	}
 			];
 
 let getCardImage = {
@@ -113,7 +113,6 @@ let getRank = (card) =>{
 let containsNTimes = (handRanks, elementToBeSearched, minimum) =>{
 	let count = 0;
 	let flag = false;
-
 	for( key in handRanks){
 		if(handRanks[key] === elementToBeSearched){
 			count++;
@@ -129,24 +128,20 @@ let isOrdered = (handRanks) =>{
 	let result = false;
 	let highestRank = 0;
 	let lowestRank = 0;
-
 	for(let i = 0 ; i < handRanks.length; i++){
 		if( getRank(handRanks[i]) > getRank(handRanks[highestRank])){
 			highestRank = i;
 		} 
 	}
-
 	for(let i = 0 ; i < handRanks.length; i++){
 		if( getRank(handRanks[i]) < getRank(handRanks[lowestRank])){
 			lowestRank = i;
 		} 
 	}
-
 	let differenceOfRank = highestRank - lowestRank;
 	if(differenceOfRank >= 4){
 		result = true;
 	}
-
 	return result;
 }
 
@@ -154,14 +149,26 @@ let numberOfSuits = (handSuits) =>{
 	differenceCount = 0;
 	console.log('differenceCounts');
 
-
-
 	for(let i = 0; i < handSuits.length; i++){
 		if(handSuits[i] != handSuits[i+1]){
 			differenceCount++;
 			console.log(differenceCount);
 		}
 	}
+}
+
+let isFlush = (hand) =>{
+	let result = false;
+	let handSuits = hand.map(function (card) {
+		return card.suit;
+	});
+	suits.forEach(function (suit) {
+		let flag = containsNTimes(handSuits, suit, 5);
+		if (flag) {
+			result = true;
+		}
+	});
+	return result;
 }
 
 let isStraight = (hand) =>{
@@ -281,11 +288,12 @@ var hasOnePair = (hand) =>{
 
 let getPresentHands = (hand) =>{
 	let handStrenth = {
-		onePair : hasOnePair(hand),
-		twoPair : hasTwoPair(hand),
-		threeOfAKind : isThreeOfAKind(hand),
+		onePair 	: hasOnePair(hand),
+		twoPair 	: hasTwoPair(hand),
+		threeOfAKind: isThreeOfAKind(hand),
 		fourOfAKind : isFourOfAKind(hand),
-		straight : isStraight(hand)
+		straight 	: isStraight(hand),
+		flush 		: isFlush(hand),
 	};
 	console.log(handStrenth);
 }
