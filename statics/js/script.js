@@ -91,22 +91,6 @@ let getCardImage = {
 						}
 					};
 
-// let getRank = {
-// 					'ace'	: 14, 
-// 					'king'	: 13, 
-// 					'queen'	: 12, 
-// 					'jack'	: 11, 
-// 					'ten'	: 10, 
-// 					'nine'	: 9, 
-// 					'eight'	: 8, 
-// 					'seven'	: 7, 
-// 					'six'	: 6, 
-// 					'five'	: 5, 
-// 					'four'	: 4, 
-// 					'three'	: 3, 
-// 					'two'	: 2
-// 				};
-
 let getRank = (card) =>{
 	switch(card){
 		case 'ace'		: return 14; 
@@ -142,40 +126,76 @@ let containsNTimes = (handRanks, elementToBeSearched, minimum) =>{
 } 
 
 let isOrdered = (handRanks) =>{
-	console.log('handRanks-->');
-	console.log(handRanks);
+	let result = false;
 	let highestRank = 0;
 	let lowestRank = 0;
-	
-	console.log(getRank(currentRank));
-	// for(let i = 0 ; i < handRanks.length; i++){
-	// 	if( getRank.handRanks[i] > getRank.handRanks[highestRank] )
-	// }
+
+	for(let i = 0 ; i < handRanks.length; i++){
+		if( getRank(handRanks[i]) > getRank(handRanks[highestRank])){
+			highestRank = i;
+		} 
+	}
+
+	for(let i = 0 ; i < handRanks.length; i++){
+		if( getRank(handRanks[i]) < getRank(handRanks[lowestRank])){
+			lowestRank = i;
+		} 
+	}
+
+	let differenceOfRank = highestRank - lowestRank;
+	if(differenceOfRank >= 4){
+		result = true;
+	}
+
+	return result;
+}
+
+let numberOfSuits = (handSuits) =>{
+	differenceCount = 0;
+	console.log('differenceCounts');
+
+
+
+	for(let i = 0; i < handSuits.length; i++){
+		if(handSuits[i] != handSuits[i+1]){
+			differenceCount++;
+			console.log(differenceCount);
+		}
+	}
 }
 
 let isStraight = (hand) =>{
 	let result = false;
 	let numberOfPairs = 0;
-	let handRanks;
-	handRanks = hand.map(function (card) {
+	let handRanks = hand.map(function (card) {
 		return card.rank;
 	});
+
+	let handSuits = hand.map(function (card) {
+		return card.suit;
+	});
+
 	ranks.forEach(function (rank) {
-		let flag = containsNTimes(handRanks, rank, 2);
-		if (flag) {
-			result = true;
+		if (containsNTimes(handRanks, rank, 2)) {
 			numberOfPairs++;
 		}
 	});
+
+	let hasNoDifferentSuit = false;
+	suits.forEach(function (suit) {
+				let hasNoDifferentSuit = containsNTimes(handRanks, suit, 5);
+			});
+
 	console.log('numberOfPairs   ->  ' + numberOfPairs);
+
 	if(numberOfPairs === 0){
-		let ordered =	isOrdered(handRanks);
+		if(isOrdered(handRanks)){
+			if(!hasNoDifferentSuit){
+				result = true;
+			}
+		}
 	}
-
-
-
 	return result;
-
 }
 
 let isThreeOfAKind = (hand) =>{
