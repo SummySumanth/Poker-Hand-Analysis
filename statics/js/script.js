@@ -3,11 +3,11 @@ let suits = ['clubs', 'hearts', 'spades', 'diamonds'];
 let ranks = ['ace', 'king', 'queen', 'jack', 'ten', 'nine', 'eight', 'seven', 'six', 'five', 'four', 'three', 'two'];
 
 let hand = [
-				{	rank:'three', suit: 'clubs'		},
-				{	rank:'four', suit: 'clubs'	},
-				{	rank:'six', suit: 'clubs'		},
-				{	rank:'five', suit: 'clubs'		},
-				{	rank:'ace', suit: 'clubs'	}
+				{	rank:'ace', suit: 'clubs'		},
+				{	rank:'king', suit: 'clubs'	},
+				{	rank:'queen', suit: 'clubs'		},
+				{	rank:'jack', suit: 'clubs'		},
+				{	rank:'ten', suit: 'clubs'	}
 			];
 
 let getCardImage = {
@@ -155,6 +155,45 @@ let numberOfSuits = (handSuits) =>{
 			console.log(differenceCount);
 		}
 	}
+}
+
+let isRoyalFlush = (hand) =>{
+	let result = false;
+
+	let isHandStraightFlush = isStraightFlush(hand);
+
+	let handRanks = hand.map(function (card) {
+		return card.rank;
+	});
+
+	let royal = {
+		ace 	: false,
+		king 	: false,
+		queen 	: false,
+		jack 	: false,
+		ten		: false
+	}
+	// to check if it is royal
+	for(key in handRanks){
+		switch(handRanks[key]){
+			case 'ace' : royal.ace = true;
+				break;
+			case 'king' : royal.king = true;
+				break;
+			case 'queen' : royal.queen = true;
+				break;
+			case 'jack' : royal.jack = true;
+				break;
+			case 'ten' : royal.ten = true;
+				break;
+		}
+	}
+
+	if(royal.ace && royal.king && royal.queen && royal.jack && royal.ten){
+		result = true;
+	}
+
+	return result;
 }
 
 let isStraightFlush = (hand) =>{
@@ -306,6 +345,7 @@ let getPresentHands = (hand) =>{
 		straight 		: isStraight(hand),
 		flush 			: isFlush(hand),
 		straightFlush	: isStraightFlush(hand),
+		royalFlush 		: isRoyalFlush(hand),
 	};
 	console.log(handStrenth);
 }
